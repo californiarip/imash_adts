@@ -18,15 +18,15 @@ csci152_student::csci152_student(std::string nm,
         i++;
     }
 
-    i = 0;
+    size_t j = 0;
     for (auto item: quizzes)
     {
-        quiz_scores[i] = item;
-        i++;
+        quiz_scores[j] = item;
+        j++;
     }
 }
 
-csci152_student::csci152_student(const csci152_student& other) //copy constructor
+csci152_student::csci152_student(const csci152_student& other)
 {
     name = other.name;
     num_of_assignments = other.num_of_assignments;
@@ -39,15 +39,14 @@ csci152_student::csci152_student(const csci152_student& other) //copy constructo
     {
         assignment_scores[i] = other.assignment_scores[i];
     }
-    for(size_t i = 0; i < other.num_of_assignments; i++)
+    for(size_t i = 0; i < other.num_of_quizzes; i++)
     {
         quiz_scores[i] = other.quiz_scores[i];
     }
 }
 
-csci152_student& csci152_student::operator=(const csci152_student& other) //assignment
+csci152_student& csci152_student::operator=(const csci152_student& other)
 {
-    
     name = other.name;
     final_exam_score = other.final_exam_score;
 
@@ -74,64 +73,63 @@ csci152_student& csci152_student::operator=(const csci152_student& other) //assi
     return *this;
 }
 
-std::string csci152_student::get_name() const //name getter
+std::string csci152_student::get_name() const 
 {
     return name;
 }
 
-void csci152_student::change_name(std::string new_name) //name setter
+void csci152_student::change_name(std::string new_name) 
 {
     name = new_name;
 }
 
-double csci152_student::calculate_assignment_perc() const //calculates assignments
+double csci152_student::calculate_assignment_perc() const
 {
-    float sum = 0;
+    float sum = 0.0;
     
     for(size_t i = 0; i < num_of_assignments; i++){
         sum += assignment_scores[i];
     }
 
-    float assGrade = (sum/num_of_assignments) / 100 * 25;
+    double assGrade = (double) (sum / num_of_assignments);
 
     return assGrade;
 }
 
-double csci152_student::calculate_quiz_perc() const //calculates quizzes
+double csci152_student::calculate_quiz_perc() const
 {
-
-    float sum = 0;
+    double sum = 0.0;
     float min = quiz_scores[0];
 
     for(size_t i = 0; i < num_of_quizzes; i++){
-        if(quiz_scores[i] < min)
+        if(quiz_scores[i] < min){
             min = quiz_scores[i];
+        }
         sum += quiz_scores[i];
     }
 
     sum = sum - min;
-    float average = sum/(num_of_quizzes - 1);
-    float quizGrade = (average/20) * 45;
+    float quizGrade = (sum / (num_of_quizzes - 1)) * (100.0 / 20.0);
 
     return quizGrade;
 }
 
-double csci152_student::get_final_exam_perc() const //getter for final exam score
+double csci152_student::get_final_exam_perc() const 
 {
     return final_exam_score;
 }
 
-double csci152_student::calculate_course_perc() const //outputs total course percentage
+double csci152_student::calculate_course_perc() const 
 {
-    float assGrade = csci152_student::calculate_assignment_perc();
-    float quizGrade = csci152_student::calculate_quiz_perc();
+    float assignmentGrade = calculate_assignment_perc();
+    float quizzzGrade = calculate_quiz_perc();
     float finalGrade = get_final_exam_perc();
-    float totalPerc = quizGrade + assGrade + finalGrade * 0.3;
+    float totalPerc = (quizzzGrade * 0.45) + (assignmentGrade * 0.25) + (finalGrade * 0.3);
     return totalPerc;
 }
 
-csci152_student::~csci152_student() //destructor, deallocates memory
+csci152_student::~csci152_student() 
 {
     delete[] assignment_scores;
     delete[] quiz_scores;
-};
+}
