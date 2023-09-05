@@ -2,7 +2,7 @@
 #include "queue.h"
 
 queue::queue(const queue& q):
-    queue_size(0), 
+    	queue_size(0), 
 	front(nullptr), 
 	back(nullptr)
 {
@@ -36,7 +36,6 @@ queue::queue(std::initializer_list<int> ilist):
 queue& queue::operator=(const queue& q){
     if(this != &q){
         clear();
-
         if(q.front != nullptr){
             node* copyPtr = q.front;
             node* trackPtr = new node(copyPtr->value);
@@ -63,8 +62,7 @@ void queue::push(int val){
         front = pushPtr;
         back = pushPtr;
         queue_size++;
-    }
-    else{
+    } else{
         back->next = pushPtr;
         back = pushPtr;
         queue_size++;
@@ -90,13 +88,11 @@ void queue::pop(){
 
 void queue::clear(){
     node* delPtr = front;
-
     while(delPtr != nullptr){
         node* trackPtr = delPtr->next;
         delete delPtr;
         delPtr = trackPtr;
     }
-
     queue_size = 0;
     front = 0;
     back = 0;
@@ -112,7 +108,6 @@ bool queue::empty() const{
 
 queue::~queue(){
     node* clrPtr = front;
-
     while(clrPtr != nullptr){
         node* next = clrPtr->next;
         delete clrPtr;

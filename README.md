@@ -1,6 +1,5 @@
-# csci152_imash
-summer 2023 csci 152
+# abstract data structures
 
-hola hola hola
+in this repository, I have uploaded my implementations of abstract data structuress - stack, queue, set, hashmaps.
 
-altusha is my janymka <3
+These have been done for the course csci152: performance and data structures, summer 2023.

@@ -9,16 +9,15 @@ bool equal(const std::string& s1, const std::string& s2){
         if (std::tolower(s1[i]) != std::tolower(s2[i]))
             return false;
     }
-
     return true;
 }
 
 size_t hash(const std::string& s){
-    size_t hash_val = 0;
-    for(char ch: s){
-        hash_val = (hash_val * 31) + std::tolower(ch);
-    }
-    return hash_val;
+	size_t hash_val = 0;
+   	for(char ch: s){
+        	hash_val = (hash_val * 31) + std::tolower(ch);
+    	}
+    	return hash_val;
 }
 
 set::set(const set& s):

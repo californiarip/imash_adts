@@ -2,7 +2,7 @@
 #include <iostream>
 
 treenode* copynodes(treenode* original){
-    if(original == nullptr)
+	if(original == nullptr)
 		return nullptr;
 
 	treenode* newNode = new treenode(original->value);
@@ -27,16 +27,13 @@ bool set::contains(int i) const{
 
     while(current != nullptr){
         if(i == current->value){
-            return true;
-        }
-        else if(i < current->value){
-            current = current->left;
-        }
-        else if(i > current->value){
-            current = current->right;
+            	return true;
+        } else if(i < current->value){
+            	current = current->left;
+        } else if(i > current->value){
+            	current = current->right;
         }
     }
-
     return false;
 }
 
@@ -53,38 +50,34 @@ bool set::insert(int i){
     while(current != nullptr){
         if(i == current->value){
             return false;
-        }
-        else if(i < current->value){
-            prev = current;
-            current = current->left;
-        }
-        else if(i > current->value){
-            prev = current;
-            current = current->right;
+        } else if(i < current->value){
+          	prev = current;
+           	current = current->left;
+        } else if(i > current->value){
+            	prev = current;
+            	current = current->right;
         }
     }
 
     if(i < prev->value){
-        prev->left = new treenode(i);
+    	prev->left = new treenode(i);
+    } else if(i > prev->value){
+      	prev->right = new treenode(i);
     }
-    else if(i > prev->value){
-        prev->right = new treenode(i);
-    }
-
     set_size++;
     return true;
 }
 
 void set::clear(){
-    deallocatenodes(root);
+    	deallocatenodes(root);
 	root = nullptr;
 	set_size = 0;
 }
 
 bool set::empty() const{
-    return (set_size == 0);
+   	return (set_size == 0);
 }
 
 size_t set::size() const{
-    return set_size;
+   	return set_size;
 }
